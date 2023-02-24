@@ -6,8 +6,8 @@ sudo yum install bash-completion -y
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 # déconnectez-vous et reconectez-vous :-)
 
-# Installation de tekton
-kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+# Installation de la version 0.26 de tekton
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.26.0/release.yaml
 
 # Création du namespace cicd qui hébergera les ressources de nos pipelines
 kubectl create namespace cicd
