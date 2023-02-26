@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-task
+  name: push-task
   namespace: cicd
 spec:
   workspaces:
@@ -12,18 +12,16 @@ spec:
       description: The name of the docker image
       default: alpinehelloworld
   steps:
-    - name: build
+    - name: push
       image: docker
       command:
         - sh
         - -c
         - "
-          apk update && \
-          apk add --no-cache git && \
-          git clone https://github.com/heroku/alpinehelloworld.git && \
-          cd  alpinehelloworld && \
-          docker build -t $(params.imageName) . && \
-          docker save $(params.imageName) > $(workspaces.dockerImageArtefact.path)/$(params.imageName).tar
+          docker login --username jimcarl91 --password dckr_pat_bYLZiA-j9mjq2i5I5xUf8PUQxuM && \
+          docker load < $(workspaces.dockerImageArtefact.path)/$(params.imageName).tar && \
+          docker tag $(params.imageName) jimcarl91/$(params.imageName) && \
+          docker push jimcarl91/$(params.imageName)
           "
       securityContext:
         privileged: true

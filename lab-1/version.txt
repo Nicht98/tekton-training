@@ -1,7 +1,0 @@
-### Module Version ###
-
-minikube version: v1.29.0
-kubectl version : v1.19.4
-docker version : v23.0.1
-tekton version : v0.26.0
-OS : Centos7
